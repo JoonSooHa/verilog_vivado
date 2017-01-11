@@ -2,8 +2,8 @@
 
 module ander_tb;
   reg a, b;
-  wire out;
-  ander uut (.a(a),.b(b),.out(out));
+  wire result;
+  ander uut (.a(a),.b(b),.result(result));
   initial begin
     a=0;	b=0;
     #200;

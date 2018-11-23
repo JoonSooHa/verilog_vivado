@@ -23,14 +23,12 @@ module vga_out (
 	output VGA_SYNC_N;
 	output VGA_CLK;
 
-
 	wire	pclk;
 	reg	[1:0]	pcnt;
 	integer	hcnt,vcnt;
 	integer	h1,h2,v1,v2;
 	reg	[23:0]  vga_out;
-	
-	
+		
 	assign   VGA_R = vga_out[23:16];
 	assign   VGA_G = vga_out[15:8];
 	assign   VGA_B = vga_out[7:0];
@@ -49,7 +47,7 @@ module vga_out (
 		if(hcnt == 800) begin
 			hcnt <= 0;
 			vcnt <= vcnt + 1;
-			if(vcnt == 521)	vcnt <= 0;
+			if(vcnt == 524)	vcnt <= 0;
 		end
 		
 		if(hcnt>=0 && hcnt<96)	VGA_HS <= 1'b0;
@@ -58,7 +56,7 @@ module vga_out (
 		if(vcnt>=0 && vcnt<2)	VGA_VS <= 1'b0;
 		else							VGA_VS <= 1'b1;
 		
-		if(hcnt>=144 && hcnt<784 && vcnt>=31 && vcnt<511) begin
+		if(hcnt>=144 && hcnt<784 && vcnt>=35 && vcnt<515) begin
 			if (hcnt == 300) begin
 				vga_out <= 24'hff0000;
 			end
@@ -75,5 +73,6 @@ module vga_out (
 			VGA_BLANK_N <= 1'b0;
 		end		
 	end 
+			
 
 endmodule

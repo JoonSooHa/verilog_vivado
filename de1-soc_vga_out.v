@@ -12,7 +12,7 @@ module vga_out (
 		VGA_CLK
 	);
 
-	input			CLOCK_50;
+	input  CLOCK_50;
 
 	output [7:0] VGA_R;
 	output [7:0] VGA_G;
@@ -51,10 +51,10 @@ module vga_out (
 		end
 		
 		if(hcnt>=0 && hcnt<96)	VGA_HS <= 1'b0;
-		else							VGA_HS <= 1'b1;
+		else	VGA_HS <= 1'b1;
 		
 		if(vcnt>=0 && vcnt<2)	VGA_VS <= 1'b0;
-		else							VGA_VS <= 1'b1;
+		else	VGA_VS <= 1'b1;
 		
 		if(hcnt>=144 && hcnt<784 && vcnt>=35 && vcnt<515) begin
 			if (hcnt == 300) begin

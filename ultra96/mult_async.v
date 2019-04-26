@@ -2,7 +2,7 @@ module mult_async(
     input clka,
     input clkb,
 
-    input[3:0] i_a, i_b
+    input[3:0] i_a, i_b,
     output[7:0] o_result
 );
 

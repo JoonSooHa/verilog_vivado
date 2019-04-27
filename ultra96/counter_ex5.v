@@ -1,4 +1,4 @@
-module counter_ex6(clk,clr,q);
+module counter_ex5(clk,clr,q);
     
     input clk,clr;
     output [3:0] q;

@@ -7,6 +7,7 @@
 #include "xstatus.h"
 
 unsigned int cnt_val;
+int min = 0, sec = 0;
 
 static XIntc InterruptController;
 
@@ -83,8 +84,6 @@ int initialize_interrupt()
 void counter_handler(void *CallbackRef)
 {
 	static int int_cnt = 0;
-	static int min = 0;
-	static int sec = 0;
 
 	if(++int_cnt == 120) {
 		XIntc_Disable(&InterruptController, XPAR_INTC_0_MYCOUNTER_0_VEC_ID);
@@ -97,6 +96,8 @@ void counter_handler(void *CallbackRef)
 
 void watch()
 {
+	min = 0; sec = 0;
+
     MYCOUNTER_mWriteReg(XPAR_MYCOUNTER_0_S00_AXI_BASEADDR, 4, 1); // start counter
     XIntc_Enable(&InterruptController, XPAR_INTC_0_MYCOUNTER_0_VEC_ID);
 }

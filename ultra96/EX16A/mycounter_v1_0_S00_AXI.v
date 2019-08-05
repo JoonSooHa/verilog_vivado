@@ -412,7 +412,7 @@
         .q      (q_tmp      ),
         .cnt_max(cnt_max    )
     );
-    q_out <= q_tmp(26:19);
+    assign q_out = q_tmp[26:19];
 	// User logic ends
 
 	endmodule

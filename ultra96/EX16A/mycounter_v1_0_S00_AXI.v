@@ -408,7 +408,7 @@
         .clk    (S_AXI_ACLK ),
         .rst    (rst_tmp    ),
         .clr    (slv_reg0[0]),
-        .en     (slv_reg0[1]),
+        .en     (slv_reg1[0]),
         .q      (q_tmp      ),
         .cnt_max(cnt_max    )
     );

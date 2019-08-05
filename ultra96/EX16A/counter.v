@@ -3,7 +3,7 @@ module counter(
     input rst,
     input clr,
     input en,
-    output reg q,
+    output reg[26:0] q,
     output reg cnt_max
 ); 
 

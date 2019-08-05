@@ -15,7 +15,7 @@
 	)
 	(
 		// Users to add ports here
-		output[7:0] q,
+		output[7:0] q_out,
         output cnt_max,
 		// User ports ends
 		// Do not modify the ports beyond this line
@@ -45,19 +45,13 @@
 		input wire  s00_axi_rready
 	);
 	
-	wire clr;
-	wire en;
-	wire[26:0] cnt;
-	
 // Instantiation of Axi Bus Interface S00_AXI
 	mycounter_v1_0_S00_AXI # ( 
 		.C_S_AXI_DATA_WIDTH(C_S00_AXI_DATA_WIDTH),
 		.C_S_AXI_ADDR_WIDTH(C_S00_AXI_ADDR_WIDTH)
 	) mycounter_v1_0_S00_AXI_inst (
-	    .clr(clr),
-		.en(en),
-		.cnt(cnt),
-	
+	    .q_out(q_out),
+        .cnt_max(cnt_max),
 		.S_AXI_ACLK(s00_axi_aclk),
 		.S_AXI_ARESETN(s00_axi_aresetn),
 		.S_AXI_AWADDR(s00_axi_awaddr),
@@ -82,15 +76,7 @@
 	);
 
 	// Add user logic here
-    counter u_counter(
-        .clk(s00_axi_aclk),
-        .rst(~s00_axi_aresetn),
-        .clr(clr),
-        .en(en),
-        .cnt(cnt),
-        .q(q),
-        .cnt_max(cnt_max)
-    );
+
 	// User logic ends
 
 	endmodule

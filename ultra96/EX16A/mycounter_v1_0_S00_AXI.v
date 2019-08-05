@@ -15,9 +15,8 @@
 	)
 	(
 		// Users to add ports here
-        output clr,
-		output en,
-		input[26:0] cnt,
+        output[7:0] q_out,
+        output      cnt_max,
 		// User ports ends
 		// Do not modify the ports beyond this line
 
@@ -115,6 +114,10 @@
 	reg [C_S_AXI_DATA_WIDTH-1:0]	 reg_data_out;
 	integer	 byte_index;
 	reg	 aw_en;
+
+    // custom
+    wire[26:0] q_tmp;
+    wire       rst_tmp;
 
 	// I/O Connections assignments
 
@@ -374,7 +377,7 @@
 	      case ( axi_araddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB] )
 	        2'h0   : reg_data_out <= slv_reg0;
 	        2'h1   : reg_data_out <= slv_reg1;
-	        2'h2   : reg_data_out <= {5'd0,cnt}; //slv_reg2;
+	        2'h2   : reg_data_out <= {5'd0,q_tmp}; //slv_reg2;
 	        2'h3   : reg_data_out <= slv_reg3;
 	        default : reg_data_out <= 0;
 	      endcase
@@ -400,8 +403,16 @@
 	end    
 
 	// Add user logic here
-    assign clr = slv_reg0[0];
-    assign en = slv_reg1[0];
+    assign rst_tmp = ~S_AXI_ARESETN;
+    counter u_counter(
+        .clk    (S_AXI_ACLK ),
+        .rst    (rst_tmp    ),
+        .clr    (slv_reg0[0]),
+        .en     (slv_reg0[1]),
+        .q      (q_tmp      ),
+        .cnt_max(cnt_max    )
+    );
+    q_out <= q_tmp(26:19);
 	// User logic ends
 
 	endmodule

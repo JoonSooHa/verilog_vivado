@@ -14,16 +14,13 @@ module detect_01_fsm(
 
     always @(*) 
     begin
+        next_state <= current_state;
         case (current_state)
             S_IDLE :
                 if (i_seq == 1'b0)
                     next_state <= S_DETECT_0;
-                else
-                    next_state <= S_IDLE;
             S_DETECT_0 :
-                if (i_seq == 1'b0)
-                    next_state <= S_DETECT_0;
-                else
+                if (i_seq == 1'b1)
                     next_state <= S_DETECT_01;
             S_DETECT_01 : 
                 if (i_seq == 1'b0) 

@@ -49,11 +49,11 @@ module vga_out(
             end
         end
         
-		if(hcnt>=656 && hcnt<752) vga_hs <= 1'b0;
-		else                      vga_hs <= 1'b1;
-		
-		if(vcnt>=490 && vcnt<492) vga_vs <= 1'b0;
-		else                      vga_vs <= 1'b1;
+	if(hcnt>=656 && hcnt<752) vga_hs <= 1'b0;
+	else                      vga_hs <= 1'b1;
+	
+	if(vcnt>=490 && vcnt<492) vga_vs <= 1'b0;
+	else                      vga_vs <= 1'b1;
             
         if(hcnt>=0 && hcnt<640 && vcnt>=0 && vcnt<480)
             if (hcnt == 300) vga_o <= 12'hf00;
